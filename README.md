@@ -1,1 +1,2 @@
-# Node-Project-LMS-
+# My Node Project
+# This is a Library Management System

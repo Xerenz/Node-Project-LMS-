@@ -1,0 +1,37 @@
+body {
+    background-image: url(../img/library.jpg);
+}
+
+.login {
+    background-color: white;
+    color: rgb(25, 150, 207);
+    margin-left: 70%;
+    margin-top: 10%;
+    margin-right: 10%;
+    text-align: center;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 20px;
+}
+
+label{
+    display:inline-block;
+    min-width:80px
+}
+
+input {
+    background-color: white;
+    border-radius: 8px;
+    height: 20px;
+    border-color: rgb(25, 150, 207);
+}
+
+button {
+    background-color:rgb(25, 150, 207);
+    height: 30px;
+    border-radius: 8px;
+    width: 80px;
+    color: white;
+    border-color: rgb(25, 150, 207);
+    
+}

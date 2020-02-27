@@ -35,3 +35,7 @@ button {
     border-color: rgb(25, 150, 207);
     
 }
+
+a {
+    text-decoration: none;
+}

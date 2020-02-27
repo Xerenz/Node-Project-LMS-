@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<head>
+    <title>View Book</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+    
+    <%book.forEach((book)=>{%>
+        <tr>
+          <th>
+          <td><%= book.name%></td>
+          <td><%= book.author%></td>
+          <td><%= book.genre%></td>
+        </th>
+        </tr>
+    <%  }) %>
+
+
+</body>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+    <title>View Book</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="data_show">
+    <table> 
+        <tr>
+            <th><h3>Sl. No   </h3></th>
+            <th><h3>Name  </h3></th>
+            <th><h3>Author  </h3></th>
+            <th><h3>Genre  </h3></th>
+            <th><h3>Taken By </h3></th>
+        </tr>
+        <% let i=1 %>
+    <%books.forEach((books)=>{%>
+        <tr>
+          <td><%= i++ %></td>
+          <td><%= books.name%></td>
+          <td><%= books.author%></td>
+          <td><%= books.genre%></td>
+          <td><%= books.username%></td>
+        </th>
+        </tr>
+    <%  }) %>
+</table>
+</div>
+
+
+</body>

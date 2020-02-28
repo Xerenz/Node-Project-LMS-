@@ -23,11 +23,14 @@ server.use(passport.session());
 
 //Route path
 const booklistRoutes = require("./routes/booklist.route");
+const userlistRoutes = require("./routes/userlist.route");
+const userbooklistRoutes = require("./routes/userbooklist.route");
 
 
 //Using model
 const User = require("./models/users.model");
 const Book = require("./models/books.model");
+const Withdrawn = require("./models/withdrawn_books.model");
 
 //passport
 passport.use(new localStrategy(User.authenticate()));
@@ -40,13 +43,8 @@ server.set("view engine","ejs");
 
 //Setting parent routes
 server.use('/booklist',booklistRoutes);
-
-
-//To display static web pages
-server.get('/home',(req,res) => {
-    res.render("home");
-    console.log("Veetil ethiyee...!");
-})
+server.use('/userlist',userlistRoutes);
+server.use('/viewbook',userbooklistRoutes);
 
 //Resgister
 server.get("/register",(req,res) => {
@@ -56,7 +54,9 @@ server.get("/register",(req,res) => {
 server.post("/register",(req,res) => {
     User.register(new User({
 
-        username: req.body.username
+        username: req.body.username,
+        college: req.body.college,
+        phone: req.body.phone
     
     }), req.body.password, (err,user) => {
         if(err) {
@@ -67,7 +67,7 @@ server.post("/register",(req,res) => {
         passport.authenticate('local')(req,res,() => {
             if(req.user) {
                 console.log("User Authenticated");
-                res.redirect('/home');
+                res.redirect('/polisaanam');
             }
         });
     });
@@ -80,7 +80,7 @@ server.get('/login', (req,res) => {
 
 server.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    successRedirect: '/home'
+    successRedirect: '/home1'
 }));
 
 //logout
@@ -110,7 +110,7 @@ server.post('/addbook', (req,res) => {
             return res.redirect('/addbook');
         }
         console.log("Book Added");
-        res.redirect('/home');
+        res.redirect('/booklist');
     });
 });
 
@@ -127,8 +127,73 @@ server.post('/removebook', (req,res) => {
             return res.redirect('/removebook');
         }
         console.log(("The book "+req.body.name+" by "+req.body.author+" is deleted."));
-        res.redirect('/home');
+        res.redirect('/booklist');
     });
+});
+
+//Remove User
+server.get('/removeuser', (req,res) => {
+    res.render("removeuser");
+});
+
+server.post('/removeuser', (req,res) => {
+    User.deleteOne({username: req.body.username}, err => {
+        if(err)
+        {
+            console.log(err);
+            return res.redirect('/removeuser');
+        }
+        console.log(("The User "+req.body.username+" is deleted."));
+        res.redirect('/userlist');
+    });
+});
+
+//To change book from library to user
+server.get('/takebook', (req,res) => {
+    res.render('takebook');
+});
+
+server.post('/takebook', (req,res) => {
+    Book.find({name:req.body.name, author: req.body.author},(err,books) => {
+        if(err) return res.redirect('/takebook');
+        console.log(books);
+        withdrawn = new Withdrawn({
+            name: req.body.name,
+            author: req.body.author,
+            genre: books[0].genre,
+            username: req.body.username
+        }); 
+        console.log(withdrawn);
+
+        withdrawn.save((err,files) => {
+            if(err)
+            {
+                console.log(err);
+                res.redirect('/takebook');
+            }
+            console.log("Book added to user DB");
+            res.redirect('/viewbook');
+         });
+    });  
+    Book.deleteOne({name: req.body.name, author: req.body.author}, err => {
+        if(err)
+        {
+            console.log(err);
+            return res.redirect('/takebook');
+        }
+        console.log(("The book "+req.body.name+" by "+req.body.author+" is deleted."));
+    });
+});
+
+//To display static web pages
+server.get('/polisaanam',(req,res) => {
+    res.render("home");
+    console.log("Veetil ethiyee...!");
+})
+
+server.get('/home1', (req,res) => {
+    res.render("home1");
+    console.log("Aaro veetil ethi..!");
 });
 
 

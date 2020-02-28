@@ -30,15 +30,11 @@ button {
     background-color:rgb(25, 150, 207);
     height: 30px;
     border-radius: 8px;
-    width: 80px;
+    width: 90px;
     color: white;
     border-color: rgb(25, 150, 207);
     
 }
-
-a {
-    text-decoration: none;
-} 
 
 .data_show{
     background-color :white;
@@ -56,4 +52,33 @@ table {
     border-radius: 2px;
     border-color: black;
     border-style: solid;
+}
+
+
+
+a:link, a:visited {
+    background-color: white;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width :80%;
+    border-color: black;
+    border-style: solid;
+    border-radius: 8px;
+  }
+  
+  a:hover, a:active {
+    background-color:rgb(185, 255, 246);
+  }
+
+.align {
+    padding : 1%;
+    background-color: rgb(185, 255, 246);
+    margin-top: 180px;
+    margin-left: 55%;
+    margin-right: 25%;
+    border-radius: 5%;
+    text-align: center;
 }

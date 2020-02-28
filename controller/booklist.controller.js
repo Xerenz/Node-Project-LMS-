@@ -6,7 +6,7 @@ exports.view_book = (req,res) => {
         if(err)
         {
             console.log(err);
-            return res.render('/home');
+            return res.render('home');
         }
         console.log(book);
         res.render('view_book', {book:book});

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+    <title>View Book</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="data_show">
+    <table> 
+        <tr>
+            <th><h3>Sl. No   </h3></th>
+            <th><h3>Name  </h3></th>
+            <th><h3>College  </h3></th>
+            <th><h3>Phone  </h3></th>
+        </tr>
+        <% let i=1 %>
+    <%user.forEach((user)=>{%>
+        <tr>
+          <td><%= i++ %></td>
+          <td><%= user.username%></td>
+          <td><%= user.college%></td>
+          <td><%= user.phone%></td>
+        </th>
+        </tr>
+    <%  }) %>
+</table>
+</div>
+
+
+</body>

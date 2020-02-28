@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Log-In</title>
+    <title>Withdraw Book</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
 </head>
@@ -9,17 +9,16 @@
 <body class="bodyimg">
     
     <div class = "login">
-        <h1>Log in</h1>
-       <form action='/login' method="POST">
+        <h1>Withdraw Book</h1>
+       <form action='/takebook' method="POST">
+           <label>Name: </label>
+           <input type="text" name="name" required><br><br>
+           <label>Author: </label>
+           <input type="text" name="author" required><br><br>
            <label>Username: </label>
            <input type="text" name="username" required><br><br>
-           <label>Password: </label>
-           <input type="password" name="password" required><br><br>
-           <button>Log In</button><br>
+           <button>WITHDRAW</button>
        </form>
-       <form action='/register' method="POST">
-        <br><button>Sign Up</button>
-    </form>
     </div>
 
 

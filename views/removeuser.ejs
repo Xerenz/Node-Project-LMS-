@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Remove Book</title>
+    <title>Remove User</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
 </head>
@@ -9,12 +9,10 @@
 <body class="bodyimg">
     
     <div class = "login">
-        <h1>Remove Book</h1>
-       <form action='/removebook' method="POST">
+        <h1>Remove User</h1>
+       <form action='/removeuser' method="POST">
            <label>Name: </label>
-           <input type="text" name="name" required><br><br>
-           <label>Author: </label>
-           <input type="text" name="author" required><br><br>
+           <input type="text" name="username" required><br><br>
            <button>DELETE</button>
        </form>
     </div>

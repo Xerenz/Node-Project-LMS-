@@ -22,7 +22,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 //Route path
-const booklistRoutes = require("./routes/booklist.route.js");
+const booklistRoutes = require("./routes/booklist.route");
 
 
 //Using model
@@ -89,9 +89,9 @@ server.get('/logout', (req,res) => {
     res.redirect('/login');
 });
 
-//add book
+//Add book
 server.get('/addbook', (req,res) => {
-    res.render('addbook');
+    res.render("addbook");
 });
 
 server.post('/addbook', (req,res) => {
@@ -115,8 +115,8 @@ server.post('/addbook', (req,res) => {
 });
 
 //Remove Book
-server.get('/removebook',(req,res) => {
-    res.render('removebook');
+server.get('/removebook', (req,res) => {
+    res.render("removebook");
 });
 
 server.post('/removebook', (req,res) => {
@@ -130,8 +130,6 @@ server.post('/removebook', (req,res) => {
         res.redirect('/home');
     });
 });
-
-
 
 
 server.listen(3000);

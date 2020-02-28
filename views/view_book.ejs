@@ -7,16 +7,27 @@
 </head>
 
 <body>
-    
+    <div class="data_show">
+    <table> 
+        <tr>
+            <th><h3>Sl. No   </h3></th>
+            <th><h3>Name  </h3></th>
+            <th><h3>Author</h3></th>
+            <th><h3>Genre </h3></th>
+            
+        </tr>
+        <% let i=1 %>
     <%book.forEach((book)=>{%>
         <tr>
-          <th>
+          <td><%= i++ %></td>
           <td><%= book.name%></td>
           <td><%= book.author%></td>
           <td><%= book.genre%></td>
         </th>
         </tr>
     <%  }) %>
+</table>
+</div>
 
 
 </body>

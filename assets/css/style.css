@@ -1,4 +1,4 @@
-body {
+.bodyimg {
     background-image: url(../img/library.jpg);
 }
 
@@ -38,4 +38,22 @@ button {
 
 a {
     text-decoration: none;
+} 
+
+.data_show{
+    background-color :white;
+    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-left: 650px;
+    color: black;
+    border-top: black;    
+}
+
+table {
+    width: 50%;
+    text-align: center;
+    font-size: large;
+    border-radius: 2px;
+    border-color: black;
+    border-style: solid;
 }

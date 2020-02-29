@@ -5,7 +5,9 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
 const bodyParser = require("body-parser");
-
+const flash = require("connect-flash");
+const nodemailer = require('nodemailer');
+const expressSession = require("express-session");
 
 //Creating server
 const server = express();
@@ -14,12 +16,18 @@ const server = express();
 mongoose.connect("mongodb://localhost/library");
 
 //Using resources
+server.use(expressSession({
+    secret: "Polisaanam",
+    resave: false,
+    saveUninitialized: false
+}));
 server.use("/assets/css", express.static(__dirname + "/assets/css"));
 server.use("/assets/img", express.static(__dirname + "/assets/img"));
 server.use(bodyParser.urlencoded({extended : false}));
 server.use(bodyParser.json());
 server.use(passport.initialize());
 server.use(passport.session());
+server.use(flash());
 
 //Route path
 const booklistRoutes = require("./routes/booklist.route");
@@ -52,6 +60,7 @@ server.get("/register",(req,res) => {
 });
 
 server.post("/register",(req,res) => {
+    if(req.body.password == req.body.confpassword) {
     User.register(new User({
 
         username: req.body.username,
@@ -63,6 +72,7 @@ server.post("/register",(req,res) => {
             console.log(err);
             return res.redirect('/register');
         }
+        
         console.log("User created "+user.username);
         passport.authenticate('local')(req,res,() => {
             if(req.user) {
@@ -71,16 +81,22 @@ server.post("/register",(req,res) => {
             }
         });
     });
+    }
+    else {
+        console.log("Password Mismatch");
+        res.redirect('/register');
+    }
 });
 
 //Login
 server.get('/login', (req,res) => {
-    res.render('login');
+    res.render('login',{message: req.flash("Wrong Username or password")});
 });
 
 server.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    successRedirect: '/home1'
+    failureFlash:true,
+    successRedirect: '/home1',
 }));
 
 //logout
@@ -197,4 +213,4 @@ server.get('/home1', (req,res) => {
 });
 
 
-server.listen(3000);
+server.listen(8000);

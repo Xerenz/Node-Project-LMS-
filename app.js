@@ -65,7 +65,8 @@ server.post("/register",(req,res) => {
 
         username: req.body.username,
         college: req.body.college,
-        phone: req.body.phone
+        phone: req.body.phone,
+        mail: req.body.mail
     
     }), req.body.password, (err,user) => {
         if(err) {
@@ -81,6 +82,35 @@ server.post("/register",(req,res) => {
             }
         });
     });
+
+    //sending mail to registered people
+    smtpTransport = nodemailer.createTransport({
+        host:'smtp.gmail.com',
+        post:465,
+        secure:true,
+        auth: {
+            user: 'nerdhacker007@gmail.com',
+            pass: 'lianalmessi10'
+        }
+    });
+
+    let msg = {
+        to: req.body.mail,
+        from: 'Library Admin <nerdhacker007@gmail.com>',
+        subject: 'User Registration',
+        text: `Hey ${req.body.username},
+
+Thank you for registering in the library. You may use ${req.body.username} as your login username.
+
+Regards,
+Library Admin`
+    };
+
+    smtpTransport.sendMail(msg, (err) => {
+        if(err) return console.log(err);
+        console.log("Mail sent to "+req.body.username+".");
+    });
+
     }
     else {
         console.log("Password Mismatch");

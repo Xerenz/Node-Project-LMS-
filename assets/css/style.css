@@ -67,10 +67,12 @@ a:link, a:visited {
     border-color: black;
     border-style: solid;
     border-radius: 8px;
+    cursor: pointer;
   }
   
   a:hover, a:active {
     background-color:rgb(185, 255, 246);
+    cursor: pointer;
   }
 
 .align {
@@ -85,4 +87,11 @@ a:link, a:visited {
 
 small {
     color: black;
+}
+
+.home {
+    text-align: center;
+    margin-left: 45%;
+    margin-right: 45%;
+
 }

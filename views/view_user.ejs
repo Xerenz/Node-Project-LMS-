@@ -14,6 +14,7 @@
             <th><h3>Name  </h3></th>
             <th><h3>College  </h3></th>
             <th><h3>Phone  </h3></th>
+            <th><h3>Mail  </h3></th>
         </tr>
         <% let i=1 %>
     <%user.forEach((user)=>{%>
@@ -22,10 +23,15 @@
           <td><%= user.username%></td>
           <td><%= user.college%></td>
           <td><%= user.phone%></td>
+          <td><%= user.mail%></td>
         </th>
         </tr>
     <%  }) %>
 </table>
+
+</div>
+<div class = "home">
+    <a href="/polisaanam">Home</a>
 </div>
 
 

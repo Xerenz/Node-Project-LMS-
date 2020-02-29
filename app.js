@@ -59,30 +59,17 @@ server.get("/register",(req,res) => {
     res.render("register");
 });
 
+let u = {};
 server.post("/register",(req,res) => {
     if(req.body.password == req.body.confpassword) {
-    User.register(new User({
 
+    u = {
         username: req.body.username,
         college: req.body.college,
         phone: req.body.phone,
-        mail: req.body.mail
-    
-    }), req.body.password, (err,user) => {
-        if(err) {
-            console.log(err);
-            return res.redirect('/register');
-        }
-        
-        console.log("User created "+user.username);
-        passport.authenticate('local')(req,res,() => {
-            if(req.user) {
-                console.log("User Authenticated");
-                res.redirect('/polisaanam');
-            }
-        });
-    });
-
+        mail: req.body.mail,
+        password: req.body.password
+    };
     //sending mail to registered people
     smtpTransport = nodemailer.createTransport({
         host:'smtp.gmail.com',
@@ -102,6 +89,8 @@ server.post("/register",(req,res) => {
 
 Thank you for registering in the library. You may use ${req.body.username} as your login username.
 
+Click on this link to confirm registration http://localhost:8000/confirm .
+
 Regards,
 Library Admin`
     };
@@ -109,6 +98,7 @@ Library Admin`
     smtpTransport.sendMail(msg, (err) => {
         if(err) return console.log(err);
         console.log("Mail sent to "+req.body.username+".");
+        return res.redirect('/thankyou');
     });
 
     }
@@ -116,6 +106,34 @@ Library Admin`
         console.log("Password Mismatch");
         res.redirect('/register');
     }
+});
+
+
+//Mail Confirmation
+server.get('/confirm', (req,res) => {
+    res.render('confirm');
+    User.register(new User({
+
+        username: u.username,
+        college: u.college,
+        phone: u.phone,
+        mail: u.mail
+    
+    }), u.password, (err,user) => {
+        if(err) {
+            console.log(err);
+            return res.redirect('/register');
+        }
+        
+        passport.authenticate('local')(req,res,() => {
+            if(req.user)
+            {
+                console.log("User Authenticated..!");
+            }
+        });
+        console.log("User created "+user.username);
+        
+    });  
 });
 
 //Login
@@ -242,5 +260,8 @@ server.get('/home1', (req,res) => {
     console.log("Aaro veetil ethi..!");
 });
 
+server.get('/thankyou',(req,res) => {
+    res.render('thankyou');
+});
 
 server.listen(8000);

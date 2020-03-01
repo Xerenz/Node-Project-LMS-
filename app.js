@@ -112,6 +112,9 @@ Library Admin`
 //Mail Confirmation
 server.get('/confirm', (req,res) => {
     res.render('confirm');
+
+    console.log(u);
+
     User.register(new User({
 
         username: u.username,
@@ -143,9 +146,10 @@ server.get('/login', (req,res) => {
 
 server.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    failureFlash:true,
     successRedirect: '/home1',
-}));
+}), function(req, res) {
+    console.log("I want to see how this works"); // checks
+});
 
 //logout
 server.get('/logout', (req,res) => {
